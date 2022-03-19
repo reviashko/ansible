@@ -1,0 +1,16 @@
+---
+# check web resources after deploy
+
+- name: Check Console returns a status 200
+  uri:
+    url: "{{ console_url }}"
+    return_content: yes
+  register: console_content
+  failed_when: "'502 Bad Gateway' in console_content.content"
+  
+- name: Check Instasite returns a status 200
+  uri:
+    url: "{{ instasite_url }}"
+    return_content: yes
+  register: insta_content
+  failed_when: "'502 Bad Gateway' in insta_content.content"
