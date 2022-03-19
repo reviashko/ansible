@@ -1,0 +1,9 @@
+---
+# This playbook deploys timeplot on servers available web servers
+
+- name: update git and deploy the timeplot servers if it needed
+  hosts: tpservers
+  remote_user: root
+
+  roles:
+    - timeplot_web

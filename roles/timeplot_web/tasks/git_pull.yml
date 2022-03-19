@@ -1,0 +1,6 @@
+---
+# These tasks pull new features from git
+
+- name: Git pull changes
+  shell: chdir=/home/nailit git pull;
+  register: git_pull_result

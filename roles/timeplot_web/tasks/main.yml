@@ -1,0 +1,4 @@
+---
+- include: git_pull.yml
+- include: docker_build.yml
+- include: docker_clean.yml

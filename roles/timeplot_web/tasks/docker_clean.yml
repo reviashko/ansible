@@ -1,0 +1,7 @@
+---
+# These tasks clean dangling docker images
+
+- name: Remove all dangling images
+  shell: docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
+  ignore_errors: yes
+  when: git_pull_result.stdout.find('Already up-to-date') == -1
