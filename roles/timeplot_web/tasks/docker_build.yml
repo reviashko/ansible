@@ -9,8 +9,18 @@
   shell: chdir=/home/nailit docker-compose up --build -d
   when: git_pull_result.stdout.find('Already up-to-date') == -1
   register: build_console_result
+  
+- name: Report Console build step
+  debug:
+   msg: "Console built successfully"
+  when: build_console_result is changed
 
 - name: Run Instasite build
   shell: chdir=/home/nailit docker-compose -f docker-compose.insta.yml up --build -d
   when: build_console_result is changed
   register: build_insta_result
+  
+- name: Report Instasite build step
+  debug:
+   msg: "Instasite built successfully"
+  when: build_insta_result is changed
