@@ -1,0 +1,15 @@
+---
+# download last db backup & put it into git
+
+- name: Get last backup file name
+  shell: "ls {{ db_backup }} -tr -I '*.sh' | tail -n 1;"
+  register: backup_file
+  
+#- name: Copy last modifed backup file
+#  shell: "chdir={{ db_backup }} cp -f {{ backup_file.stdout }} db.sql;"
+
+- name: Download last database backup file to local repo
+  ansible.builtin.fetch:
+    src: '{{ db_backup }}{{ backup_file.stdout }}'
+    dest: "{{ localrepository }}db.sql"
+    flat: yes
