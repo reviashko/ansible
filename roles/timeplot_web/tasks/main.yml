@@ -3,3 +3,5 @@
 - include: docker_build.yml
 - include: docker_clean.yml
 - include: curl_check.yml
+- include: db_backup_get.yml
+#- include: telegram.yml

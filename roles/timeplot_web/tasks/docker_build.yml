@@ -14,6 +14,20 @@
   debug:
    msg: "Console built successfully"
   when: build_console_result is changed
+  
+- name: Send the success Console built message to Telegram
+  telegram:
+    token: "{{ telegram_token }}"
+    chat_id: "{{ telegram_chat_id }}"
+    msg: Console built successfully
+  when: build_console_result is changed
+  
+- name: Send the error Console built message to Telegram
+  telegram:
+    token: "{{ telegram_token }}"
+    chat_id: "{{ telegram_chat_id }}"
+    msg: Console built error
+  when: build_console_result is failed
 
 - name: Run Instasite build
   shell: chdir=/home/nailit docker-compose -f docker-compose.insta.yml up --build -d
@@ -24,3 +38,17 @@
   debug:
    msg: "Instasite built successfully"
   when: build_insta_result is changed
+
+- name: Send the Instasite built success message to Telegram
+  telegram:
+    token: "{{ telegram_token }}"
+    chat_id: "{{ telegram_chat_id }}"
+    msg: Instasite built successfully
+  when: build_insta_result is changed
+  
+- name: Send the Instasite error message to Telegram
+  telegram:
+    token: "{{ telegram_token }}"
+    chat_id: "{{ telegram_chat_id }}"
+    msg: Instasitee built error
+  when: build_insta_result is failed

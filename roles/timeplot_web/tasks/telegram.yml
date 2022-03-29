@@ -1,0 +1,5 @@
+- name: Send the Instasite error message to Telegram
+  telegram:
+    token: "{{ telegram_token }}"
+    chat_id: "{{ telegram_chat_id }}"
+    msg: Just hello!
